@@ -15,7 +15,6 @@ exports.postFlashcards = async (req, res) => {
   try {
     const { title, body } = req.body;
     const newFlashcard = new Flashcard({ title, body });
-    // console.log(newFlashcard);
     await newFlashcard.save();
     res.json(newFlashcard);
   } catch (error) {
@@ -37,5 +36,24 @@ exports.deleteFlashcard = async (req, res) => {
     res
       .status(500)
       .json({ message: "An error occurred", message: error.message });
+  }
+};
+
+exports.updateFlashcard = async (req, res) => {
+  try {
+    const updatedFlashcard = await Flashcard.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    if (!updatedFlashcard) {
+      return res.status(404).json({ message: "Flashcard not found" });
+    }
+
+    res.json(updatedFlashcard);
+  } catch (error) {
+    console.error("Error updating flashcard:", error);
+    res.status(500).json({ message: "An error occurred" });
   }
 };

@@ -8,4 +8,6 @@ router.post("/", flashcardController.postFlashcards);
 
 router.delete("/:id", flashcardController.deleteFlashcard);
 
+router.put("/:id", flashcardController.updateFlashcard);
+
 module.exports = router;
