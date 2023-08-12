@@ -22,3 +22,20 @@ exports.postFlashcards = async (req, res) => {
     res.status(500).json({ error: "Error saving flashcards", error });
   }
 };
+
+exports.deleteFlashcard = async (req, res) => {
+  try {
+    const flashcard = await Flashcard.findByIdAndDelete(req.params.id);
+
+    if (!flashcard) {
+      return res.status(404).json({ message: "Flashcard not found" });
+    }
+
+    res.json({ message: "Flashcard deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting flashcard:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred", message: error.message });
+  }
+};
