@@ -1,9 +1,11 @@
-import AddFlashcardForm from "./components/AddFlashcardForm";
+// import AddFlashcardForm from "./components/AddFlashcardForm";
+import FlashcardList from "./components/FlashcardList";
 
 function App() {
   return (
     <div>
-      <AddFlashcardForm />
+      {/* <AddFlashcardForm /> */}
+      <FlashcardList />
     </div>
   );
 }
