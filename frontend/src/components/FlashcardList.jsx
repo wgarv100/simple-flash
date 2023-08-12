@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Flashcard from "./Flashcard"; // Create a Flashcard component for displaying flashcards
 
-const FlashcardList = () => {
+const FlashcardList = ({ flashcard, onDelete }) => {
   const [flashcards, setFlashcards] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,11 @@ const FlashcardList = () => {
   return (
     <div>
       {flashcards.map((flashcard) => (
-        <Flashcard key={flashcard._id} flashcard={flashcard} />
+        <Flashcard
+          key={flashcard._id}
+          flashcard={flashcard}
+          onDelete={onDelete}
+        />
       ))}
     </div>
   );
