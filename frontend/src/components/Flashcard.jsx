@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import {
+  deleteFlashcard,
+  updateFlashcard,
+} from "../services/flashcardServices";
 
 const Flashcard = ({ flashcard, onDelete, onUpdate }) => {
   const [updatedFlashcard, setUpdatedFlashcard] = useState({
@@ -8,14 +12,9 @@ const Flashcard = ({ flashcard, onDelete, onUpdate }) => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`/api/flashcards/${flashcard._id}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
+      const success = await deleteFlashcard(flashcard._id);
+      if (success) {
         onDelete(flashcard._id);
-      } else {
-        console.error("Failed to delete flashcard");
       }
     } catch (error) {
       console.error("Error deleting flashcard:", error);
@@ -32,19 +31,13 @@ const Flashcard = ({ flashcard, onDelete, onUpdate }) => {
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch(`/api/flashcards/${flashcard._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedFlashcard),
-      });
+      const updatedFlashcardData = await updateFlashcard(
+        flashcard._id,
+        updatedFlashcard
+      );
 
-      if (response.ok) {
-        const updatedFlashcardData = await response.json();
+      if (updatedFlashcardData) {
         onUpdate(updatedFlashcardData); // Update UI with updated flashcard data
-      } else {
-        console.error("Failed to update flashcard");
       }
     } catch (error) {
       console.error("Error updating flashcard:", error);

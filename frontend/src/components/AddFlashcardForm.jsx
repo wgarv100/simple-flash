@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { addFlashcard } from "../services/flashcardServices";
 
 const AddFlashcardForm = () => {
   const [title, setTitle] = useState("");
@@ -16,30 +17,14 @@ const AddFlashcardForm = () => {
       return;
     }
 
-    addFlashcardToBackend();
-  };
-
-  const addFlashcardToBackend = async () => {
-    try {
-      const response = await fetch("/api/flashcards", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ title, body }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to add flashcard.");
+    addFlashcard(title, body).then((success) => {
+      if (success) {
+        // Clear the form fields and error
+        setTitle("");
+        setBody("");
+        setError("");
       }
-
-      // Clear the form fields and error
-      setTitle("");
-      setBody("");
-      setError("");
-    } catch (error) {
-      console.error("Error adding flashcard:", error);
-    }
+    });
   };
 
   return (
