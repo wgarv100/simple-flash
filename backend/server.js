@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const flashcardsRoutes = require("./routes/flashcards");
+const groupAndFlashcardRoutes = require("./routes/groupAndFlashcardRoutes");
 
 const app = express();
 const port = process.env.PORT;
@@ -15,7 +15,7 @@ mongoose
 
     app.use(express.json());
 
-    app.use("/api/flashcards", flashcardsRoutes);
+    app.use("/api/groups", groupAndFlashcardRoutes);
 
     app.listen(5000, () => {
       console.log(`Server is running on port ${port}`);
