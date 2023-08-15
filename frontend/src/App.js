@@ -1,11 +1,13 @@
-import AddFlashcardForm from "./components/AddFlashcardForm";
-import FlashcardList from "./components/FlashcardList";
+// import AddFlashcardForm from "./components/AddFlashcardForm";
+// import FlashcardList from "./components/FlashcardList";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <div>
-      <AddFlashcardForm />
-      <FlashcardList />
+      {/* <AddFlashcardForm /> */}
+      {/* <FlashcardList /> */}
+      <Home />
     </div>
   );
 }
