@@ -1,8 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import { ListItemText } from "@mui/material";
+import { Drawer, List, ListItem, ListItemText } from "@mui/material";
+import { Link } from "react-router-dom";
 import { getAllGroups } from "../services/flashcardServices";
 
 const Sidebar = () => {
@@ -30,7 +29,14 @@ const Sidebar = () => {
     >
       <List>
         {groups.map((group) => (
-          <ListItemText key={group._id}>{group.name}</ListItemText>
+          <ListItem
+            key={group._id}
+            button
+            component={Link}
+            to={`/groups/${group._id}`}
+          >
+            <ListItemText primary={group.name} />
+          </ListItem>
         ))}
       </List>
     </Drawer>
