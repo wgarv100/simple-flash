@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "../components/Sidebar"; // Import the Sidebar component
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div style={{ display: "flex" }}>
       <Sidebar />
@@ -9,4 +9,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

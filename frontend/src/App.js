@@ -1,14 +1,14 @@
-// import AddFlashcardForm from "./components/AddFlashcardForm";
-// import FlashcardList from "./components/FlashcardList";
-import Home from "./pages/Home";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+// import FlashcardsPage from "./pages/FlashcardsPage";
 
 function App() {
   return (
-    <div>
-      {/* <AddFlashcardForm /> */}
-      {/* <FlashcardList /> */}
-      <Home />
-    </div>
+    <Routes>
+      <Route path="/" exact element={<HomePage />} />
+      {/* <Route path="/flashcards/:groupId" component={FlashcardsPage} /> */}
+    </Routes>
   );
 }
 
