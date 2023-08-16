@@ -1,6 +1,16 @@
 const Group = require("../models/group");
 const Flashcard = require("../models/flashcard");
 
+exports.getAllGroups = async (req, res) => {
+  try {
+    const groups = await Group.find();
+    res.json(groups);
+  } catch (error) {
+    console.error("Error fetching groups:", error);
+    res.status(500).json({ error: "An error occurred while fetching groups." });
+  }
+};
+
 exports.createGroup = async (req, res) => {
   try {
     const { name } = req.body;
