@@ -1,9 +1,25 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import { ListItemText } from "@mui/material";
+import { getAllGroups } from "../services/flashcardServices";
 
 const Sidebar = () => {
+  const [groups, setGroups] = useState([]);
+
+  useEffect(() => {
+    fetchGroups();
+  }, []);
+
+  const fetchGroups = async () => {
+    try {
+      const fetchedGroups = await getAllGroups();
+      setGroups(fetchedGroups);
+    } catch (error) {
+      console.error("Error fetching groups:", error);
+    }
+  };
   return (
     <Drawer
       variant="permanent"
@@ -13,9 +29,9 @@ const Sidebar = () => {
       }}
     >
       <List>
-        <ListItemText primary="Group 1" />
-        <ListItemText primary="Group 2" />
-        <ListItemText primary="Group 3" />
+        {groups.map((group) => (
+          <ListItemText key={group._id}>{group.name}</ListItemText>
+        ))}
       </List>
     </Drawer>
   );

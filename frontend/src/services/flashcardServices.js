@@ -1,3 +1,21 @@
+// GET all groups
+
+export const getAllGroups = async () => {
+  try {
+    const response = await fetch("/api/groups");
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch groups.");
+    }
+
+    const groups = await response.json();
+    return groups;
+  } catch (error) {
+    console.error("Error fetching groups:", error);
+    throw error;
+  }
+};
+
 // Create
 export const addFlashcard = async (title, body) => {
   try {
