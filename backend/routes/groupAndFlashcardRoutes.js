@@ -5,6 +5,11 @@ const groupAndFlashcardController = require("../controllers/groupAndFlashcardCon
 
 router.get("/", groupAndFlashcardController.getAllGroups);
 
+router.get(
+  "/:groupId/flashcards",
+  groupAndFlashcardController.getFlashcardsInGroup
+);
+
 router.post("/", groupAndFlashcardController.createGroup);
 
 router.post(
