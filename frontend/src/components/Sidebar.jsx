@@ -8,7 +8,7 @@ const Sidebar = ({ groups }) => {
       variant="permanent"
       anchor="left"
       PaperProps={{
-        sx: { width: "15%", backgroundColor: "#f0f0f0" },
+        sx: { width: "250px", backgroundColor: "#f0f0f0" },
       }}
     >
       <List>

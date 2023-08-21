@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Grid } from "@mui/material";
 import Sidebar from "../components/Sidebar"; // Import the Sidebar component
+import FlashcardList from "../components/FlashcardList";
 import { getAllGroups } from "../services/flashcardServices";
 
 const HomePage = () => {
@@ -13,9 +15,14 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div style={{ display: "flex" }}>
-      <Sidebar groups={groups} />
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={3}>
+        <Sidebar groups={groups} />
+      </Grid>
+      <Grid item xs={9}>
+        <FlashcardList />
+      </Grid>
+    </Grid>
   );
 };
 
