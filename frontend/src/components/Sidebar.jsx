@@ -1,24 +1,8 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import { Drawer, List, ListItem, ListItemText } from "@mui/material";
 import { Link } from "react-router-dom";
-import { getAllGroups } from "../services/flashcardServices";
 
-const Sidebar = () => {
-  const [groups, setGroups] = useState([]);
-
-  useEffect(() => {
-    fetchGroups();
-  }, []);
-
-  const fetchGroups = async () => {
-    try {
-      const fetchedGroups = await getAllGroups();
-      setGroups(fetchedGroups);
-    } catch (error) {
-      console.error("Error fetching groups:", error);
-    }
-  };
+const Sidebar = ({ groups }) => {
   return (
     <Drawer
       variant="permanent"
