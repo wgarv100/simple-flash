@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "@mui/material";
-import Sidebar from "../components/Sidebar"; // Import the Sidebar component
-import FlashcardList from "../components/FlashcardList";
+import Sidebar from "../components/Sidebar";
 import { getAllGroups } from "../services/flashcardServices";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [groups, setGroups] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch all groups
     getAllGroups()
       .then((data) => setGroups(data))
       .catch((error) => console.error("Error fetching groups:", error));
   }, []);
 
+  const handleGroupSelect = (group) => {
+    navigate(`/groups/${group._id}`);
+  };
+
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={3}>
-        <Sidebar groups={groups} />
-      </Grid>
-      <Grid item xs={9}>
-        <FlashcardList />
-      </Grid>
-    </Grid>
+    <div>
+      <Sidebar groups={groups} onGroupSelect={handleGroupSelect} />
+    </div>
   );
 };
 
