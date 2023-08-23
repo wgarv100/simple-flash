@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import {
-  getAllGroups,
-  getFlashcardsByGroup,
-} from "../services/flashcardServices";
+import { getFlashcardsByGroup } from "../services/flashcardServices";
+import { getAllGroups } from "../services/groupServices";
 import FlashcardList from "../components/FlashcardList";
 import Sidebar from "../components/Sidebar";
 import { Typography, IconButton } from "@mui/material";

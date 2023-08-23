@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import AddGroupForm from "../components/AddGroupForm";
-import { getAllGroups } from "../services/flashcardServices";
-import { addGroup } from "../services/groupServices";
+import { addGroup, getAllGroups } from "../services/groupServices";
 
 const HomePage = () => {
   const [groups, setGroups] = useState([]);
