@@ -1,4 +1,22 @@
-// services/groupServices.js
+const deleteGroup = async (groupId) => {
+  try {
+    const response = await fetch(`/api/groups/${groupId}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      return true; // Group deleted successfully
+    } else {
+      throw new Error("Failed to delete group");
+    }
+  } catch (error) {
+    console.error("Error deleting group:", error);
+    return false;
+  }
+};
+
+export { deleteGroup };
+
 const addGroup = async (groupName) => {
   try {
     const response = await fetch("/api/groups", {
