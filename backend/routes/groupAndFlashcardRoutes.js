@@ -17,4 +17,6 @@ router.post(
   groupAndFlashcardController.createFlashcard
 );
 
+router.delete("/:groupId", groupAndFlashcardController.deleteGroup);
+
 module.exports = router;

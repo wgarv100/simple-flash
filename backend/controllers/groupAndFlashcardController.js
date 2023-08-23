@@ -74,3 +74,14 @@ exports.createFlashcard = async (req, res) => {
       .json({ error: "An error occurred while creating the flashcard." });
   }
 };
+
+exports.deleteGroup = async (req, res) => {
+  try {
+    const groupId = req.params.groupId;
+    await Group.findByIdAndDelete(groupId);
+    res.sendStatus(204);
+  } catch (error) {
+    console.error("Error deleting group:", error);
+    res.status(500).json({ error: "Failed to delete group" });
+  }
+};
