@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
+import AddGroupForm from "../components/AddGroupForm";
 import { getAllGroups } from "../services/flashcardServices";
-import { useNavigate } from "react-router-dom";
+import { addGroup } from "../services/groupServices";
 
 const HomePage = () => {
   const [groups, setGroups] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     getAllGroups()
@@ -13,13 +13,24 @@ const HomePage = () => {
       .catch((error) => console.error("Error fetching groups:", error));
   }, []);
 
-  const handleGroupSelect = (group) => {
-    navigate(`/groups/${group._id}`);
+  const handleAddGroup = async (groupName) => {
+    try {
+      const success = await addGroup(groupName);
+
+      if (success) {
+        const updatedGroups = await getAllGroups(); // Fetch the updated list of groups
+        setGroups(updatedGroups);
+      }
+    } catch (error) {
+      console.error("Error handling add group:", error);
+    }
   };
 
   return (
     <div>
-      <Sidebar groups={groups} onGroupSelect={handleGroupSelect} />
+      <h1>Home</h1>
+      <Sidebar groups={groups} />
+      <AddGroupForm onSubmit={handleAddGroup} />
     </div>
   );
 };
