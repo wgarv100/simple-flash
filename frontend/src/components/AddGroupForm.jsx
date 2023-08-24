@@ -1,29 +1,37 @@
-// components/GroupForm.js
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { addGroup } from "../services/groupServices"; // Import the addGroup function
+import { addGroup } from "../services/groupServices";
+import { validateGroupName } from "./formValidation";
 
 const GroupForm = ({ onSubmit }) => {
   const [groupName, setGroupName] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
+    const validationError = validateGroupName(groupName);
+
+    if (validationError) {
+      setError(validationError);
+      return false;
+    }
 
     try {
       const success = await addGroup(groupName);
-
-      if (success) {
-        onSubmit(); // Call the parent's onSubmit function to update the list of groups
-        setGroupName(""); // Clear the input field
-      }
+      setError("");
+      setGroupName("");
+      return success;
     } catch (error) {
       console.error("Error adding group:", error);
+      setError("An error occurred while adding the group.");
+      return false;
     }
   };
+
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleFormSubmit}
       className="group-form"
       style={{ width: 500, margin: "0 auto" }}
     >
@@ -34,6 +42,8 @@ const GroupForm = ({ onSubmit }) => {
         margin="normal"
         value={groupName}
         onChange={(e) => setGroupName(e.target.value)}
+        error={!!error}
+        helperText={error}
       />
       <Button type="submit" variant="contained" color="primary">
         Add Group
