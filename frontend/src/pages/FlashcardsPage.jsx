@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { getFlashcardsByGroup } from "../services/flashcardServices";
 import { getAllGroups } from "../services/groupServices";
 import FlashcardList from "../components/FlashcardList";
 import Sidebar from "../components/Sidebar";
 import { Typography, IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete"; // Import the Delete icon
-import { deleteGroup } from "../services/groupServices";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useGroupDeletion } from "../hooks/useGroupDeletion";
 
 const FlashcardsPage = () => {
+  const { handleDeleteGroup } = useGroupDeletion();
   const { groupId } = useParams();
   const [flashcards, setFlashcards] = useState([]);
   const [groups, setGroups] = useState([]);
-  const [groupName, setGroupName] = useState(""); // Added state to hold the group name
-  const navigate = useNavigate();
+  const [groupName, setGroupName] = useState("");
 
   useEffect(() => {
     getAllGroups()
@@ -36,20 +36,6 @@ const FlashcardsPage = () => {
       .catch((error) => console.error("Error fetching flashcards:", error));
   }, [groupId, groups]);
 
-  const handleDeleteGroup = async () => {
-    const success = await deleteGroup(groupId); // Call the deleteGroup function
-
-    if (success) {
-      // Refresh the list of groups after deletion
-      getAllGroups()
-        .then((data) => setGroups(data))
-        .catch((error) => console.error("Error fetching groups:", error));
-
-      // Redirect to the homepage or another appropriate page
-      navigate("/");
-    }
-  };
-
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -59,7 +45,7 @@ const FlashcardsPage = () => {
         <IconButton
           aria-label="Delete"
           color="secondary"
-          onClick={handleDeleteGroup}
+          onClick={() => handleDeleteGroup(groupId)}
         >
           <DeleteIcon />
         </IconButton>
