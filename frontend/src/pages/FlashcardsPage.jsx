@@ -18,7 +18,7 @@ import {
 const FlashcardsPage = () => {
   const { groupId } = useParams();
   const [groups, setGroups] = useState([]);
-  const [setFlashcards] = useState([]);
+  const [flashcardsState, setFlashcardsState] = useState([]);
 
   const { handleDeleteGroup } = useGroupDeletion();
   const { groupName, flashcards } = useFlashcards(groupId);
@@ -35,20 +35,20 @@ const FlashcardsPage = () => {
       if (success) {
         // Fetch updated flashcards and update the list
         const updatedFlashcards = await getFlashcardsByGroup(groupId);
-        setFlashcards(updatedFlashcards);
+        setFlashcardsState(updatedFlashcards);
       }
     } catch (error) {
       console.error("Error adding flashcard:", error);
     }
   };
 
-  const handleDeleteFlashcard = async (flashcardId) => {
+  const handleDeleteFlashcard = async (groupId, flashcardId) => {
     const success = await deleteFlashcard(groupId, flashcardId);
 
     if (success) {
       // Refresh the list of flashcards after deletion
       const updatedFlashcards = await getFlashcardsByGroup(groupId);
-      setFlashcards(updatedFlashcards);
+      setFlashcardsState(updatedFlashcards);
     }
   };
 
