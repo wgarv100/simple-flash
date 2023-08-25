@@ -12,8 +12,8 @@ import AddFlashcardForm from "../components/AddFlashcardForm";
 import {
   addFlashcard,
   getFlashcardsByGroup,
-  deleteFlashcard,
 } from "../services/flashcardServices";
+import { useFlashcardDeletion } from "../hooks/useFlashcardDeletion";
 
 const FlashcardsPage = () => {
   const { groupId } = useParams();
@@ -21,6 +21,7 @@ const FlashcardsPage = () => {
   const [flashcardsState, setFlashcardsState] = useState([]);
 
   const { handleDeleteGroup } = useGroupDeletion();
+  const { handleDeleteFlashcard } = useFlashcardDeletion();
   const { groupName, flashcards } = useFlashcards(groupId);
 
   useEffect(() => {
@@ -39,16 +40,6 @@ const FlashcardsPage = () => {
       }
     } catch (error) {
       console.error("Error adding flashcard:", error);
-    }
-  };
-
-  const handleDeleteFlashcard = async (groupId, flashcardId) => {
-    const success = await deleteFlashcard(groupId, flashcardId);
-
-    if (success) {
-      // Refresh the list of flashcards after deletion
-      const updatedFlashcards = await getFlashcardsByGroup(groupId);
-      setFlashcardsState(updatedFlashcards);
     }
   };
 
