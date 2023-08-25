@@ -1,7 +1,7 @@
 // Create
-export const addFlashcard = async (title, body) => {
+export const addFlashcard = async (groupId, title, body) => {
   try {
-    const response = await fetch("/api/flashcards", {
+    const response = await fetch(`/api/groups/${groupId}/flashcards`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
