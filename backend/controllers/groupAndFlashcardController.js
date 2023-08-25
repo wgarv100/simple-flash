@@ -85,3 +85,33 @@ exports.deleteGroup = async (req, res) => {
     res.status(500).json({ error: "Failed to delete group" });
   }
 };
+
+exports.deleteFlashcardByGroup = async (req, res) => {
+  try {
+    const { groupId, flashcardId } = req.params;
+
+    const group = await Group.findById(groupId);
+    if (!group) {
+      return res.status(404).json({ message: "Group not found." });
+    }
+
+    const flashcardIndex = group.flashcards.findIndex(
+      (flashcard) => flashcard._id == flashcardId
+    );
+    if (flashcardIndex === -1) {
+      return res
+        .status(404)
+        .json({ message: "Flashcard not found in the group." });
+    }
+
+    group.flashcards.splice(flashcardIndex, 1);
+    await group.save();
+
+    res.json({ message: "Flashcard deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting flashcard:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while deleting the flashcard." });
+  }
+};
