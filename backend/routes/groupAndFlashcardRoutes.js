@@ -1,27 +1,20 @@
 const express = require("express");
 const router = express.Router();
 
-const groupAndFlashcardController = require("../controllers/groupAndFlashcardController");
+const flashcardController = require("../controllers/flashcardController");
+const groupController = require("../controllers/groupController");
 
-router.get("/", groupAndFlashcardController.getAllGroups);
-
-router.get(
-  "/:groupId/flashcards",
-  groupAndFlashcardController.getFlashcardsInGroup
-);
-
-router.post("/", groupAndFlashcardController.createGroup);
-
-router.post(
-  "/:groupId/flashcards",
-  groupAndFlashcardController.createFlashcard
-);
-
-router.delete("/:groupId", groupAndFlashcardController.deleteGroup);
-
+// Flashcard
+router.post("/:groupId/flashcards", flashcardController.createFlashcard);
+router.get("/:groupId/flashcards", flashcardController.getFlashcardsInGroup);
 router.delete(
   "/:groupId/flashcards/:flashcardId",
-  groupAndFlashcardController.deleteFlashcardByGroup
+  flashcardController.deleteFlashcardByGroup
 );
+
+// Group
+router.post("/", groupController.createGroup);
+router.get("/", groupController.getAllGroups);
+router.delete("/:groupId", groupController.deleteGroup);
 
 module.exports = router;
