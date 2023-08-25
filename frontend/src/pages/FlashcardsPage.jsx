@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+// MUI
 import Grid from "@mui/material/Grid";
-import { getAllGroups } from "../services/groupServices";
+import { Typography, Button } from "@mui/material";
+
+// Components
+import AddFlashcardForm from "../components/AddFlashcardForm";
 import FlashcardList from "../components/FlashcardList";
 import Sidebar from "../components/Sidebar";
-import { Typography, IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+
+// Services
+import { getAllGroups } from "../services/groupServices";
+
+// Hooks
 import { useGroupDeletion } from "../hooks/useGroupDeletion";
 import { useFlashcards } from "../hooks/useFlashcards";
-import AddFlashcardForm from "../components/AddFlashcardForm";
-import {
-  addFlashcard,
-  getFlashcardsByGroup,
-} from "../services/flashcardServices";
 import { useFlashcardDeletion } from "../hooks/useFlashcardDeletion";
+import { useFlashcardAddition } from "../hooks/useFlashcardAddition";
 
 const FlashcardsPage = () => {
   const { groupId } = useParams();
@@ -22,6 +26,7 @@ const FlashcardsPage = () => {
 
   const { handleDeleteGroup } = useGroupDeletion();
   const { handleDeleteFlashcard } = useFlashcardDeletion();
+  const { handleFlashcardAdded } = useFlashcardAddition(groupId);
   const { groupName, flashcards } = useFlashcards(groupId);
 
   useEffect(() => {
@@ -30,32 +35,19 @@ const FlashcardsPage = () => {
       .catch((error) => console.error("Error fetching groups:", error));
   }, []);
 
-  const handleFlashcardAdded = async (title, body) => {
-    try {
-      const success = await addFlashcard(groupId, title, body);
-      if (success) {
-        // Fetch updated flashcards and update the list
-        const updatedFlashcards = await getFlashcardsByGroup(groupId);
-        setFlashcardsState(updatedFlashcards);
-      }
-    } catch (error) {
-      console.error("Error adding flashcard:", error);
-    }
-  };
-
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center" }}>
         <Typography variant="h4" textAlign="center" style={{ flex: 1 }}>
           {groupName}
         </Typography>
-        <IconButton
-          aria-label="Delete"
-          color="secondary"
+        <Button
+          variant="outlined"
+          color="error"
           onClick={() => handleDeleteGroup(groupId)}
         >
-          <DeleteIcon />
-        </IconButton>
+          Delete Group
+        </Button>
       </div>
 
       <Grid container spacing={2}>
