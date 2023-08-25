@@ -10,8 +10,9 @@ import { useGroupDeletion } from "../hooks/useGroupDeletion";
 import { useFlashcards } from "../hooks/useFlashcards";
 import AddFlashcardForm from "../components/AddFlashcardForm";
 import {
-  getFlashcardsByGroup,
   addFlashcard,
+  getFlashcardsByGroup,
+  deleteFlashcard,
 } from "../services/flashcardServices";
 
 const FlashcardsPage = () => {
@@ -41,6 +42,16 @@ const FlashcardsPage = () => {
     }
   };
 
+  const handleDeleteFlashcard = async (flashcardId) => {
+    const success = await deleteFlashcard(groupId, flashcardId);
+
+    if (success) {
+      // Refresh the list of flashcards after deletion
+      const updatedFlashcards = await getFlashcardsByGroup(groupId);
+      setFlashcards(updatedFlashcards);
+    }
+  };
+
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -61,7 +72,11 @@ const FlashcardsPage = () => {
           <Sidebar groups={groups} />
         </Grid>
         <Grid item xs={10}>
-          <FlashcardList flashcards={flashcards} groupId={groupId} />
+          <FlashcardList
+            flashcards={flashcards}
+            groupId={groupId}
+            onDeleteFlashcard={handleDeleteFlashcard}
+          />
         </Grid>
       </Grid>
       <AddFlashcardForm

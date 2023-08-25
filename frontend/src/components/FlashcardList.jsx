@@ -2,8 +2,9 @@ import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
-const FlashcardList = ({ flashcards }) => {
+const FlashcardList = ({ flashcards, groupId, onDeleteFlashcard }) => {
   return (
     <div className="flashcard-list">
       {flashcards.map((flashcard) => (
@@ -19,6 +20,13 @@ const FlashcardList = ({ flashcards }) => {
             <Typography variant="body2" color="textSecondary">
               {flashcard.body}
             </Typography>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={() => onDeleteFlashcard(groupId, flashcard._id)}
+            >
+              Delete
+            </Button>
           </CardContent>
         </Card>
       ))}

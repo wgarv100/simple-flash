@@ -36,3 +36,24 @@ export const getFlashcardsByGroup = async (groupId) => {
     return [];
   }
 };
+
+// Delete
+export const deleteFlashcard = async (groupId, flashcardId) => {
+  try {
+    const response = await fetch(
+      `/api/groups/${groupId}/flashcards/${flashcardId}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to delete flashcard.");
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Error deleting flashcard:", error);
+    return false;
+  }
+};
