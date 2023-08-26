@@ -6,9 +6,9 @@ import Grid from "@mui/material/Grid";
 import { Typography, Button } from "@mui/material";
 
 // Components
-import AddFlashcardForm from "../components/AddFlashcardForm";
 import FlashcardList from "../components/FlashcardList";
 import Sidebar from "../components/Sidebar";
+import AddFlashcardModal from "../components/AddFlashcardModal";
 
 // Services
 import { getAllGroups } from "../services/groupServices";
@@ -22,11 +22,12 @@ import { useFlashcardAddition } from "../hooks/useFlashcardAddition";
 const FlashcardsPage = () => {
   const { groupId } = useParams();
   const [groups, setGroups] = useState([]);
-  const [flashcardsState, setFlashcardsState] = useState([]);
+  // const [flashcardsState, setFlashcardsState] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { handleDeleteGroup } = useGroupDeletion();
   const { handleDeleteFlashcard } = useFlashcardDeletion();
-  const { handleFlashcardAdded } = useFlashcardAddition(groupId);
+  const { handleFlashcardAdded } = useFlashcardAddition();
   const { groupName, flashcards } = useFlashcards(groupId);
 
   useEffect(() => {
@@ -34,6 +35,14 @@ const FlashcardsPage = () => {
       .then((data) => setGroups(data))
       .catch((error) => console.error("Error fetching groups:", error));
   }, []);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div>
@@ -47,6 +56,9 @@ const FlashcardsPage = () => {
           onClick={() => handleDeleteGroup(groupId)}
         >
           Delete Group
+        </Button>
+        <Button variant="contained" color="success" onClick={handleOpenModal}>
+          Add Flashcard
         </Button>
       </div>
 
@@ -62,9 +74,11 @@ const FlashcardsPage = () => {
           />
         </Grid>
       </Grid>
-      <AddFlashcardForm
-        groupId={groupId}
+      <AddFlashcardModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
         onFlashcardAdded={handleFlashcardAdded}
+        groupId={groupId}
       />
     </div>
   );

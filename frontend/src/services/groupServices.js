@@ -39,22 +39,22 @@ export const getAllGroups = async () => {
   }
 };
 
-// Read selected group
-export const fetchSelectedGroup = async (groupId) => {
-  try {
-    const response = await fetch(`/api/groups/${groupId}`);
+// // Read selected group
+// export const fetchSelectedGroup = async (groupId) => {
+//   try {
+//     const response = await fetch(`/api/groups/${groupId}`);
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch group.");
-    }
+//     if (!response.ok) {
+//       throw new Error("Failed to fetch group.");
+//     }
 
-    const group = await response.json();
-    return group;
-  } catch (error) {
-    console.error("Error fetching group:", error);
-    return null;
-  }
-};
+//     const group = await response.json();
+//     return group;
+//   } catch (error) {
+//     console.error("Error fetching group:", error);
+//     return null;
+//   }
+// };
 
 // Delete
 const deleteGroup = async (groupId) => {

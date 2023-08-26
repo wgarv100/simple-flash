@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getFlashcardsByGroup } from "../services/flashcardServices";
-import { fetchSelectedGroup } from "../services/groupServices";
 
 export const useFlashcards = () => {
   const { groupId } = useParams();
@@ -13,7 +12,7 @@ export const useFlashcards = () => {
   }, [groupId]);
 
   const fetchSelectedGroupAndFlashcards = async (groupId) => {
-    const selectedGroup = await fetchSelectedGroup(groupId);
+    const selectedGroup = await getFlashcardsByGroup(groupId);
 
     if (selectedGroup) {
       setGroupName(selectedGroup.name);
