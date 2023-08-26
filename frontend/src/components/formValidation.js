@@ -1,4 +1,4 @@
-export const validateGroupName = (groupName) => {
+export const validateAddGroupForm = (groupName) => {
   if (!groupName) {
     return "Group name is required.";
   }
@@ -8,4 +8,18 @@ export const validateGroupName = (groupName) => {
   }
 
   return "";
+};
+
+export const validateAddFlashcardForm = (title, body) => {
+  const errors = {};
+
+  if (!title.trim()) {
+    errors.title = "Title is required";
+  }
+
+  if (!body.trim()) {
+    errors.body = "Body is required";
+  }
+
+  return errors;
 };

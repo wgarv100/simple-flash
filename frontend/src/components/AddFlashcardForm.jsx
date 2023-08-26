@@ -2,20 +2,28 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { addFlashcard } from "../services/flashcardServices"; // Import the addFlashcard function
+import { addFlashcard } from "../services/flashcardServices";
+import { validateAddFlashcardForm } from "./formValidation";
 
 const AddFlashcardForm = ({ groupId, onFlashcardAdded, onClose }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const validationErrors = validateAddFlashcardForm(title, body);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
     try {
       const success = await addFlashcard(groupId, title, body);
       if (success) {
-        onFlashcardAdded(); // Trigger a callback to update the flashcard list
-        setTitle(""); // Clear input fields
+        onFlashcardAdded();
+        setTitle("");
         setBody("");
         onClose(true);
       }
@@ -42,6 +50,8 @@ const AddFlashcardForm = ({ groupId, onFlashcardAdded, onClose }) => {
         margin="normal"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        error={Boolean(errors.title)}
+        helperText={errors.title}
       />
       <TextField
         label="Body"
@@ -52,6 +62,8 @@ const AddFlashcardForm = ({ groupId, onFlashcardAdded, onClose }) => {
         rows={4}
         value={body}
         onChange={(e) => setBody(e.target.value)}
+        error={Boolean(errors.body)}
+        helperText={errors.body}
       />
       <Box style={{ paddingTop: "20px" }}>
         <Button

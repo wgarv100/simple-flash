@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { addGroup } from "../services/groupServices";
-import { validateGroupName } from "./formValidation";
+import { validateAddGroupForm } from "./formValidation";
 
-const GroupForm = ({ onSubmit }) => {
+const GroupForm = () => {
   const [groupName, setGroupName] = useState("");
   const [error, setError] = useState("");
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const validationError = validateGroupName(groupName);
+    const validationError = validateAddGroupForm(groupName);
 
     if (validationError) {
       setError(validationError);
