@@ -1,7 +1,7 @@
 // Create
 export const addFlashcard = async (groupId, title, body) => {
   try {
-    const response = await fetch(`/api/groups/${groupId}/flashcards`, {
+    const response = await fetch(`/api/flashcards/${groupId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export const addFlashcard = async (groupId, title, body) => {
 // Read
 export const getFlashcardsByGroup = async (groupId) => {
   try {
-    const response = await fetch(`/api/groups/${groupId}/flashcards`);
+    const response = await fetch(`/api/flashcards/${groupId}`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch flashcards.");
@@ -40,12 +40,9 @@ export const getFlashcardsByGroup = async (groupId) => {
 // Delete
 export const deleteFlashcard = async (groupId, flashcardId) => {
   try {
-    const response = await fetch(
-      `/api/groups/${groupId}/flashcards/${flashcardId}`,
-      {
-        method: "DELETE",
-      }
-    );
+    const response = await fetch(`/api/flashcards/${groupId}/${flashcardId}`, {
+      method: "DELETE",
+    });
 
     if (!response.ok) {
       throw new Error("Failed to delete flashcard.");

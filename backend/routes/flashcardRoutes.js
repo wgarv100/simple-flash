@@ -3,10 +3,10 @@ const router = express.Router();
 
 const flashcardController = require("../controllers/flashcardController");
 
-router.post("/:groupId/flashcards", flashcardController.createFlashcard);
-router.get("/:groupId/flashcards", flashcardController.getFlashcardsInGroup);
+router.post("/:groupId", flashcardController.createFlashcard);
+router.get("/:groupId", flashcardController.getFlashcardsInGroup);
 router.delete(
-  "/:groupId/flashcards/:flashcardId",
+  "/:groupId/:flashcardId",
   flashcardController.deleteFlashcardByGroup
 );
 

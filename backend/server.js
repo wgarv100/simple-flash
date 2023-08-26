@@ -17,7 +17,7 @@ mongoose
     app.use(express.json());
 
     app.use("/api/groups", groupRoutes);
-    app.use("/api/groups", flashcardRoutes);
+    app.use("/api/flashcards", flashcardRoutes);
 
     app.listen(5000, () => {
       console.log(`Server is running on port ${port}`);
