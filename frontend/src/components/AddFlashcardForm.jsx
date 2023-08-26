@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import { addFlashcard } from "../services/flashcardServices"; // Import the addFlashcard function
 
-const AddFlashcardForm = ({ groupId, onFlashcardAdded }) => {
+const AddFlashcardForm = ({ groupId, onFlashcardAdded, onClose }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
@@ -16,6 +17,7 @@ const AddFlashcardForm = ({ groupId, onFlashcardAdded }) => {
         onFlashcardAdded(); // Trigger a callback to update the flashcard list
         setTitle(""); // Clear input fields
         setBody("");
+        onClose(true);
       }
     } catch (error) {
       console.error("Error adding flashcard:", error);
@@ -23,7 +25,16 @@ const AddFlashcardForm = ({ groupId, onFlashcardAdded }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ width: 300, margin: "0 auto" }}>
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        width: "100%",
+        margin: "0 auto",
+        backgroundColor: "white",
+        padding: "25px",
+        borderRadius: "5px",
+      }}
+    >
       <TextField
         label="Title"
         variant="outlined"
@@ -42,9 +53,19 @@ const AddFlashcardForm = ({ groupId, onFlashcardAdded }) => {
         value={body}
         onChange={(e) => setBody(e.target.value)}
       />
-      <Button type="submit" variant="contained" color="primary">
-        Add Flashcard
-      </Button>
+      <Box style={{ paddingTop: "20px" }}>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          style={{ marginRight: "5px" }}
+        >
+          Add Flashcard
+        </Button>
+        <Button variant="contained" color="error" onClick={onClose}>
+          Close
+        </Button>
+      </Box>
     </form>
   );
 };

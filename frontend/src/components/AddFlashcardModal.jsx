@@ -1,7 +1,6 @@
 import React from "react";
 import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
-import AddFlashcardForm from "./AddFlashcardForm"; // Import your AddFlashcardForm component
+import AddFlashcardForm from "./AddFlashcardForm";
 
 const AddFlashcardModal = ({ isOpen, onClose, onFlashcardAdded, groupId }) => {
   return (
@@ -21,11 +20,8 @@ const AddFlashcardModal = ({ isOpen, onClose, onFlashcardAdded, groupId }) => {
         <AddFlashcardForm
           onFlashcardAdded={onFlashcardAdded}
           groupId={groupId}
+          onClose={onClose}
         />
-
-        <Button variant="contained" color="primary" onClick={onClose}>
-          Cancel
-        </Button>
       </div>
     </Modal>
   );
