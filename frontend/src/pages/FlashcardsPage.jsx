@@ -15,7 +15,7 @@ import { getAllGroups } from "../services/groupServices";
 
 // Hooks
 import { useGroupDeletion } from "../hooks/useGroupDeletion";
-import { useFlashcards } from "../hooks/useFlashcards";
+import { useGetFlashcards } from "../hooks/useGetFlashcards";
 import { useFlashcardDeletion } from "../hooks/useFlashcardDeletion";
 import { useFlashcardAddition } from "../hooks/useFlashcardAddition";
 
@@ -28,7 +28,7 @@ const FlashcardsPage = () => {
   const { handleDeleteGroup } = useGroupDeletion();
   const { handleDeleteFlashcard } = useFlashcardDeletion();
   const { handleFlashcardAdded } = useFlashcardAddition();
-  const { groupName, flashcards } = useFlashcards(groupId);
+  const { groupName, flashcards } = useGetFlashcards();
 
   useEffect(() => {
     getAllGroups()
