@@ -19,6 +19,9 @@ import { useGetFlashcards } from "../hooks/useGetFlashcards";
 import { useFlashcardDeletion } from "../hooks/useFlashcardDeletion";
 import { useFlashcardAddition } from "../hooks/useFlashcardAddition";
 
+// Handlers
+import { handleOpenModal, handleCloseModal } from "../handlers/modalHandlers";
+
 const FlashcardsPage = () => {
   const { groupId } = useParams();
   const [groups, setGroups] = useState([]);
@@ -36,14 +39,6 @@ const FlashcardsPage = () => {
       .catch((error) => console.error("Error fetching groups:", error));
   }, []);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -57,7 +52,11 @@ const FlashcardsPage = () => {
         >
           Delete Group
         </Button>
-        <Button variant="contained" color="success" onClick={handleOpenModal}>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() => handleOpenModal(setIsModalOpen)}
+        >
           Add Flashcard
         </Button>
       </div>
@@ -76,7 +75,7 @@ const FlashcardsPage = () => {
       </Grid>
       <AddFlashcardModal
         isOpen={isModalOpen}
-        onClose={handleCloseModal}
+        onClose={() => handleCloseModal(setIsModalOpen)}
         onFlashcardAdded={handleFlashcardAdded}
         groupId={groupId}
       />
