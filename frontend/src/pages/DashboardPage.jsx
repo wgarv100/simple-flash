@@ -15,12 +15,11 @@ import { getAllGroups } from "../services/groupServices";
 // Hooks
 import { useGroupDeletion } from "../hooks/useGroupDeletion";
 import { useGetFlashcards } from "../hooks/useGetFlashcards";
-import { useFlashcardDeletion } from "../hooks/useFlashcardDeletion";
-// import { useFlashcardAddition } from "../hooks/useFlashcardAddition";
 
 // Handlers
 import { handleOpenModal, handleCloseModal } from "../handlers/modalHandlers";
-import { handleFlashcardAdded } from "../handlers/flashcardHandlers";
+import { handleFlashcardAdded } from "../handlers/flashcardAdditionHandlers";
+import { handleFlashcardDeletion } from "../handlers/flashcardDeletionHandlers";
 
 const FlashcardsPage = () => {
   const { groupId } = useParams();
@@ -28,8 +27,6 @@ const FlashcardsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { handleDeleteGroup } = useGroupDeletion();
-  const { handleDeleteFlashcard } = useFlashcardDeletion();
-  // const { handleFlashcardAdded } = useFlashcardAddition();
   const { groupName, flashcards } = useGetFlashcards();
 
   useEffect(() => {
@@ -68,7 +65,7 @@ const FlashcardsPage = () => {
           <FlashcardList
             flashcards={flashcards}
             groupId={groupId}
-            onDeleteFlashcard={handleDeleteFlashcard}
+            onDeleteFlashcard={handleFlashcardDeletion}
           />
         </Grid>
       </Grid>
