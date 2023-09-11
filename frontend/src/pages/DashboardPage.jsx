@@ -20,6 +20,7 @@ import { useGetFlashcards } from "../hooks/useGetFlashcards";
 import { handleOpenModal, handleCloseModal } from "../handlers/modalHandlers";
 import { handleFlashcardAdded } from "../handlers/flashcardAdditionHandlers";
 import { handleFlashcardDeletion } from "../handlers/flashcardDeletionHandlers";
+import DashboardSpeedDial from "../components/DashboardSpeedDial";
 
 const FlashcardsPage = () => {
   const { groupId } = useParams();
@@ -75,6 +76,7 @@ const FlashcardsPage = () => {
         onFlashcardAdded={handleFlashcardAdded}
         groupId={groupId}
       />
+      <DashboardSpeedDial />
     </div>
   );
 };
