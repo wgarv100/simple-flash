@@ -6,8 +6,8 @@ const groupRoutes = require("./routes/groupRoutes");
 const flashcardRoutes = require("./routes/flashcardRoutes");
 
 const app = express();
-const port = process.env.PORT;
-const mongo_uri = process.env.MONGO_URI;
+const port = 5000;
+const mongo_uri = "mongodb://127.0.0.1/simple-flash";
 
 mongoose
   .connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true })
