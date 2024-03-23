@@ -25,7 +25,6 @@ const AddFlashcardForm = ({ groupId, onFlashcardAdded, onClose }) => {
         onFlashcardAdded();
         setTitle("");
         setBody("");
-        onClose(true);
       }
     } catch (error) {
       console.error("Error adding flashcard:", error);

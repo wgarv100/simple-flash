@@ -2,13 +2,7 @@ import React from "react";
 import Modal from "@mui/material/Modal";
 import AddFlashcardForm from "./AddFlashcardForm";
 
-const AddFlashcardModal = ({
-  open,
-  openModal,
-  onClose,
-  onFlashcardAdded,
-  groupId,
-}) => {
+const AddFlashcardModal = ({ open, onClose, onFlashcardAdded, groupId }) => {
   return (
     <Modal open={open} onClose={onClose}>
       <div
@@ -28,7 +22,6 @@ const AddFlashcardModal = ({
           groupId={groupId}
           onClose={onClose}
           open={open}
-          openModal={openModal}
         />
       </div>
     </Modal>

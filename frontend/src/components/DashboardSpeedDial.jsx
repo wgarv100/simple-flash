@@ -6,15 +6,23 @@ import AddCardIcon from "@mui/icons-material/AddCard";
 import AddFlashcardModal from "./AddFlashcardModal";
 
 const DashboardSpeedDial = ({ groupId }) => {
-  const [open, setOpen] = useState(false); //change name to openSpeedDial
-  const [openModal, setOpenModal] = useState(false);
+  const [openSpeedDial, setOpenSpeedDial] = useState(false);
+  const [openAddFlashcardModal, setOpenAddFlashcardModal] = useState(false);
 
   const handleOpen = () => {
-    setOpen(true);
+    setOpenSpeedDial(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenSpeedDial(false);
+  };
+
+  const handleAddFlashcardModal = () => {
+    setOpenAddFlashcardModal(false);
+  };
+
+  const handleFlashcardAdded = () => {
+    setOpenAddFlashcardModal(false);
   };
 
   return (
@@ -24,7 +32,7 @@ const DashboardSpeedDial = ({ groupId }) => {
         icon={<SpeedDialIcon />}
         onClose={handleClose}
         onOpen={handleOpen}
-        open={open}
+        open={openSpeedDial}
         style={{
           position: "fixed",
           bottom: 16,
@@ -41,13 +49,14 @@ const DashboardSpeedDial = ({ groupId }) => {
           key="Add Flashcard"
           icon={<AddCardIcon />}
           tooltipTitle="Add Flashcard"
-          onClick={() => setOpenModal(true)}
+          onClick={() => setOpenAddFlashcardModal(true)}
         />
       </SpeedDial>
       <AddFlashcardModal
         groupId={groupId}
-        open={openModal}
-        onClose={() => setOpenModal(false)}
+        open={openAddFlashcardModal}
+        onClose={handleAddFlashcardModal}
+        onFlashcardAdded={handleFlashcardAdded}
       />
     </>
   );
