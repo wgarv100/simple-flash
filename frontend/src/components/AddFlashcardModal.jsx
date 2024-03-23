@@ -2,9 +2,15 @@ import React from "react";
 import Modal from "@mui/material/Modal";
 import AddFlashcardForm from "./AddFlashcardForm";
 
-const AddFlashcardModal = ({ isOpen, onClose, onFlashcardAdded, groupId }) => {
+const AddFlashcardModal = ({
+  open,
+  openModal,
+  onClose,
+  onFlashcardAdded,
+  groupId,
+}) => {
   return (
-    <Modal open={isOpen} onClose={onClose}>
+    <Modal open={open} onClose={onClose}>
       <div
         style={{
           position: "absolute",
@@ -21,6 +27,8 @@ const AddFlashcardModal = ({ isOpen, onClose, onFlashcardAdded, groupId }) => {
           onFlashcardAdded={onFlashcardAdded}
           groupId={groupId}
           onClose={onClose}
+          open={open}
+          openModal={openModal}
         />
       </div>
     </Modal>

@@ -38,26 +38,6 @@ const FlashcardsPage = () => {
 
   return (
     <div>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <Typography variant="h4" textAlign="center" style={{ flex: 1 }}>
-          {groupName}
-        </Typography>
-        <Button
-          variant="outlined"
-          color="error"
-          onClick={() => handleDeleteGroup(groupId)}
-        >
-          Delete Group
-        </Button>
-        <Button
-          variant="contained"
-          color="success"
-          onClick={() => handleOpenModal(setIsModalOpen)}
-        >
-          Add Flashcard
-        </Button>
-      </div>
-
       <Grid container spacing={2}>
         <Grid item xs={2}>
           <Sidebar groups={groups} />
@@ -70,13 +50,7 @@ const FlashcardsPage = () => {
           />
         </Grid>
       </Grid>
-      <AddFlashcardModal
-        isOpen={isModalOpen}
-        onClose={() => handleCloseModal(setIsModalOpen)}
-        onFlashcardAdded={handleFlashcardAdded}
-        groupId={groupId}
-      />
-      <DashboardSpeedDial />
+      <DashboardSpeedDial groupId={groupId} />
     </div>
   );
 };
