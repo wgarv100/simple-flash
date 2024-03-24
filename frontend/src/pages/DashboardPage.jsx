@@ -26,7 +26,7 @@ const FlashcardsPage = () => {
     getAllGroups()
       .then((data) => setGroups(data))
       .catch((error) => console.error("Error fetching groups:", error));
-  }, []);
+  }, [groups]);
 
   useEffect(() => {
     getFlashcardsByGroup(groupId)

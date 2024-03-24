@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { addGroup } from "../services/groupServices";
 import { validateAddGroupForm } from "./formValidation";
 
-const GroupForm = () => {
+const GroupForm = ({ handleGroupAddedSuccessfully }) => {
   const [groupName, setGroupName] = useState("");
   const [error, setError] = useState("");
 
@@ -19,6 +19,7 @@ const GroupForm = () => {
 
     try {
       const success = await addGroup(groupName);
+      handleGroupAddedSuccessfully();
       setError("");
       setGroupName("");
       return success;
@@ -33,7 +34,14 @@ const GroupForm = () => {
     <form
       onSubmit={handleFormSubmit}
       className="group-form"
-      style={{ width: 500, margin: "0 auto" }}
+      style={{
+        width: 500,
+        margin: "0 auto",
+        backgroundColor: "white",
+        padding: "25px",
+        borderRadius: "5px",
+      }}
+      backgroundColor="white"
     >
       <TextField
         label="Group Name"

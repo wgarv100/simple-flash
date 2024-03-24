@@ -4,10 +4,12 @@ import GroupWorkIcon from "@mui/icons-material/GroupWork";
 import AddCardIcon from "@mui/icons-material/AddCard";
 
 import AddFlashcardModal from "./AddFlashcardModal";
+import AddGroupModal from "./AddGroupModal";
 
 const DashboardSpeedDial = ({ groupId }) => {
   const [openSpeedDial, setOpenSpeedDial] = useState(false);
   const [openAddFlashcardModal, setOpenAddFlashcardModal] = useState(false);
+  const [openAddGroupModal, setOpenAddGroupModal] = useState(false);
 
   const handleOpen = () => {
     setOpenSpeedDial(true);
@@ -23,6 +25,14 @@ const DashboardSpeedDial = ({ groupId }) => {
 
   const handleFlashcardAdded = () => {
     setOpenAddFlashcardModal(false);
+  };
+
+  const toggleAddGroupModal = () => {
+    setOpenAddGroupModal(false);
+  };
+
+  const handleGroupAddedSuccessfully = () => {
+    setOpenAddGroupModal(false);
   };
 
   return (
@@ -43,7 +53,7 @@ const DashboardSpeedDial = ({ groupId }) => {
           key="Add Group"
           icon={<GroupWorkIcon />}
           tooltipTitle="Add Group"
-          onClick={() => console.log("add group")}
+          onClick={() => setOpenAddGroupModal(true)}
         />
         <SpeedDialAction
           key="Add Flashcard"
@@ -57,6 +67,12 @@ const DashboardSpeedDial = ({ groupId }) => {
         open={openAddFlashcardModal}
         onClose={handleAddFlashcardModal}
         onFlashcardAdded={handleFlashcardAdded}
+      />
+      <AddGroupModal
+        groupId={groupId}
+        open={openAddGroupModal}
+        onClose={toggleAddGroupModal}
+        handleGroupAddedSuccessfully={handleGroupAddedSuccessfully}
       />
     </>
   );
