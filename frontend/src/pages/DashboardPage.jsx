@@ -2,36 +2,25 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 // MUI
-import { Typography, Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 
 // Components
 import FlashcardList from "../components/FlashcardList";
 import Sidebar from "../components/Sidebar";
-import AddFlashcardModal from "../components/AddFlashcardModal";
+import DashboardSpeedDial from "../components/DashboardSpeedDial";
 
 // Services
 import { getAllGroups } from "../services/groupServices";
-
-// Hooks
-import { useGroupDeletion } from "../hooks/useGroupDeletion";
-// import { useGetFlashcards } from "../hooks/useGetFlashcards";
+import { getFlashcardsByGroup } from "../services/flashcardServices";
 
 // Handlers
-import { handleOpenModal, handleCloseModal } from "../handlers/modalHandlers";
-import { handleFlashcardAdded } from "../handlers/flashcardAdditionHandlers";
 import { handleFlashcardDeletion } from "../handlers/flashcardDeletionHandlers";
-import DashboardSpeedDial from "../components/DashboardSpeedDial";
-import { getFlashcardsByGroup } from "../services/flashcardServices";
 
 const FlashcardsPage = () => {
   const { groupId } = useParams();
 
   const [flashcards, setFlashcards] = useState([]);
   const [groups, setGroups] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const { handleDeleteGroup } = useGroupDeletion();
-  // const { groupName } = useGetFlashcards();
 
   useEffect(() => {
     getAllGroups()
