@@ -1,8 +1,10 @@
 import React from "react";
 import { Drawer, List, ListItem, ListItemText } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Sidebar = ({ groups }) => {
+  const { groupId } = useParams();
+
   return (
     <Drawer
       variant="permanent"
@@ -18,6 +20,7 @@ const Sidebar = ({ groups }) => {
             button
             component={Link}
             to={`/groups/${group._id}`}
+            sx={{ bgcolor: group._id === groupId ? "lightgrey" : "inherit" }}
           >
             <ListItemText primary={group.name} />
           </ListItem>
