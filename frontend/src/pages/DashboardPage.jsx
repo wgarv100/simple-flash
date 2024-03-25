@@ -14,6 +14,7 @@ import { deleteGroup } from "../services/groupServices";
 
 // Handlers
 import { handleFlashcardDeletion } from "../handlers/flashcardDeletionHandlers";
+import { handleDeleteGroup } from "../handlers/groupHandlers";
 
 // Hooks
 import { useFlashcards } from "../hooks/useFlashcards";
@@ -29,17 +30,15 @@ const DashboardPage = () => {
 
   const navigate = useNavigate();
 
-  const handleDeleteGroup = () => {
-    if (confirmDelete) {
-      deleteGroup(groupId).then(() => {
-        if (groups.length > 0) {
-          navigate(`/groups/${groups[0]._id}`);
-        }
-      });
-    } else {
-      setConfirmDelete(true);
-    }
-  };
+  const onDeleteGroup = () =>
+    handleDeleteGroup(
+      confirmDelete,
+      deleteGroup,
+      groupId,
+      groups,
+      navigate,
+      setConfirmDelete
+    );
 
   return (
     <div>
@@ -54,11 +53,7 @@ const DashboardPage = () => {
             marginTop={1}
             marginBottom={2}
           >
-            <Button
-              variant="outlined"
-              color="error"
-              onClick={handleDeleteGroup}
-            >
+            <Button variant="outlined" color="error" onClick={onDeleteGroup}>
               {confirmDelete ? "Confirm Delete" : "Delete Group"}
             </Button>
           </Box>
