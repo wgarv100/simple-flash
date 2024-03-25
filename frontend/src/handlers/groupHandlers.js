@@ -10,6 +10,7 @@ export const handleDeleteGroup = (
     deleteGroup(groupId).then(() => {
       if (groups.length > 0) {
         navigate(`/groups/${groups[0]._id}`);
+        setConfirmDelete(false);
       }
     });
   };
