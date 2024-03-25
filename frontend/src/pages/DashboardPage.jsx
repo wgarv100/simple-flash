@@ -10,32 +10,24 @@ import Sidebar from "../components/Sidebar";
 import DashboardSpeedDial from "../components/DashboardSpeedDial";
 
 // Services
-import { getAllGroups, deleteGroup } from "../services/groupServices";
-import { getFlashcardsByGroup } from "../services/flashcardServices";
+import { deleteGroup } from "../services/groupServices";
 
 // Handlers
 import { handleFlashcardDeletion } from "../handlers/flashcardDeletionHandlers";
 
+// Hooks
+import { useFlashcards } from "../hooks/useFlashcards";
+import { useGroups } from "../hooks/useGroups";
+
 const DashboardPage = () => {
   const { groupId } = useParams();
 
-  const [flashcards, setFlashcards] = useState([]);
-  const [groups, setGroups] = useState([]);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
+  const flashcards = useFlashcards(groupId);
+  const groups = useGroups();
+
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getAllGroups()
-      .then((data) => setGroups(data))
-      .catch((error) => console.error("Error fetching groups:", error));
-  }, [groups]);
-
-  useEffect(() => {
-    getFlashcardsByGroup(groupId)
-      .then((data) => setFlashcards(data))
-      .catch((error) => console.error("Error fetching flashcards:", error));
-  }, [flashcards]);
 
   const handleDeleteGroup = () => {
     if (confirmDelete) {
