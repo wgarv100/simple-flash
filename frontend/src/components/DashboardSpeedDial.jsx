@@ -19,6 +19,7 @@ const DashboardSpeedDial = ({ groupId }) => {
     setOpenSpeedDial(false);
   };
 
+  // Add Flashcard
   const handleAddFlashcardModal = () => {
     setOpenAddFlashcardModal(false);
   };
@@ -27,6 +28,7 @@ const DashboardSpeedDial = ({ groupId }) => {
     setOpenAddFlashcardModal(false);
   };
 
+  // Add Group
   const toggleAddGroupModal = () => {
     setOpenAddGroupModal(false);
   };

@@ -39,22 +39,27 @@ export const getAllGroups = async () => {
   }
 };
 
-// // Read selected group
-// export const fetchSelectedGroup = async (groupId) => {
-//   try {
-//     const response = await fetch(`/api/groups/${groupId}`);
+// Update
+export const updateGroupName = async (groupId, newGroupName) => {
+  try {
+    const response = await fetch(`/api/groups/${groupId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: newGroupName }),
+    });
 
-//     if (!response.ok) {
-//       throw new Error("Failed to fetch group.");
-//     }
-
-//     const group = await response.json();
-//     return group;
-//   } catch (error) {
-//     console.error("Error fetching group:", error);
-//     return null;
-//   }
-// };
+    if (response.ok) {
+      return true; // Group name updated successfully
+    } else {
+      throw new Error("Failed to update group name");
+    }
+  } catch (error) {
+    console.error("Error updating group name:", error);
+    return false;
+  }
+};
 
 // Delete
 const deleteGroup = async (groupId) => {

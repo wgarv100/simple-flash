@@ -1,12 +1,12 @@
 import React from "react";
 import Modal from "@mui/material/Modal";
-import AddGroupForm from "./AddGroupForm";
+import UpdateGroupNameForm from "../forms/UpdateGroupNameForm";
 
-const AddGroupModal = ({
+const UpdateGroupNameModal = ({
   open,
   onClose,
   groupId,
-  handleGroupAddedSuccessfully,
+  handleGroupNameUpdatedSuccessfully,
 }) => {
   return (
     <Modal open={open} onClose={onClose}>
@@ -22,8 +22,10 @@ const AddGroupModal = ({
           p: 4,
         }}
       >
-        <AddGroupForm
-          handleGroupAddedSuccessfully={handleGroupAddedSuccessfully}
+        <UpdateGroupNameForm
+          handleGroupNameUpdatedSuccessfully={
+            handleGroupNameUpdatedSuccessfully
+          }
           groupId={groupId}
           onClose={onClose}
           open={open}
@@ -33,4 +35,4 @@ const AddGroupModal = ({
   );
 };
 
-export default AddGroupModal;
+export default UpdateGroupNameModal;

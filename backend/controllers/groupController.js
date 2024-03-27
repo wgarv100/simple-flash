@@ -52,6 +52,30 @@ exports.getFlashcardsInGroup = async (req, res) => {
   }
 };
 
+// Update
+exports.updateGroup = async (req, res) => {
+  try {
+    const groupId = req.params.groupId;
+    const updates = req.body;
+
+    // Find the group by ID and update it
+    const group = await Group.findByIdAndUpdate(groupId, updates, {
+      new: true,
+    });
+
+    if (!group) {
+      return res.status(404).json({ error: "Group not found" });
+    }
+
+    res.status(200).json(group);
+  } catch (error) {
+    console.error("Error updating group:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while updating the group." });
+  }
+};
+
 // Delete
 exports.deleteGroup = async (req, res) => {
   try {
