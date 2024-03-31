@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const groupRoutes = require("./routes/groupRoutes");
 const flashcardRoutes = require("./routes/flashcardRoutes");
+const trashRoutes = require("./routes/trashRoutes");
 
 const app = express();
 const port = 5000;
@@ -18,6 +19,7 @@ mongoose
 
     app.use("/api/groups", groupRoutes);
     app.use("/api/flashcards", flashcardRoutes);
+    app.use("/api/trash", trashRoutes);
 
     app.listen(5000, () => {
       console.log(`Server is running on port ${port}`);
