@@ -1,6 +1,17 @@
 const Group = require("../models/group");
 const TrashcanGroup = require("../models/Trash");
 
+exports.getDeletedGroups = async (req, res) => {
+  try {
+    // Get all TrashcanGroup documents
+    const trashcanGroups = await TrashcanGroup.find();
+    res.status(200).json(trashcanGroups);
+  } catch (error) {
+    console.error("Error getting deleted groups:", error);
+    res.status(500).json({ error: "Failed to get deleted groups" });
+  }
+};
+
 exports.moveGroupToTrash = async (req, res) => {
   try {
     const groupId = req.params.groupId;
