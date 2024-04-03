@@ -1,7 +1,17 @@
 import React from "react";
-import { Drawer, Typography } from "@mui/material";
+import {
+  Drawer,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
 
-const TrashCanSidebar = () => {
+import { Link, useParams } from "react-router-dom";
+
+const TrashCanSidebar = ({ deletedGroups }) => {
+  const { groupId } = useParams();
+
   return (
     <Drawer
       variant="permanent"
@@ -13,6 +23,21 @@ const TrashCanSidebar = () => {
       <Typography variant="h6" align="center" sx={{ mt: 2 }}>
         Deleted Groups
       </Typography>
+      <List>
+        {deletedGroups.map((deletedGroup) => (
+          <ListItem
+            key={deletedGroup._id}
+            button
+            component={Link}
+            to={`/groups/${deletedGroup._id}`}
+            sx={{
+              bgcolor: deletedGroup._id === groupId ? "lightgrey" : "inherit",
+            }}
+          >
+            <ListItemText primary={deletedGroup.name} />
+          </ListItem>
+        ))}
+      </List>
     </Drawer>
   );
 };
