@@ -28,30 +28,6 @@ exports.getAllGroups = async (req, res) => {
   }
 };
 
-// Read
-exports.getFlashcardsInGroup = async (req, res) => {
-  try {
-    const groupId = req.params.groupId;
-
-    // Find the group by ID and populate the 'flashcards' field
-    const group = await Group.findById(groupId).populate("flashcards");
-
-    if (!group) {
-      return res.status(404).json({ error: "Group not found" });
-    }
-
-    // Extract the flashcards array from the populated group
-    const flashcards = group.flashcards;
-
-    res.status(200).json(flashcards);
-  } catch (error) {
-    console.error("Error fetching flashcards:", error);
-    res
-      .status(500)
-      .json({ error: "An error occurred while fetching flashcards." });
-  }
-};
-
 // Update
 exports.updateGroup = async (req, res) => {
   try {

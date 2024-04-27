@@ -1,6 +1,7 @@
 const Group = require("../models/group");
 const TrashcanGroup = require("../models/Trash");
 
+// Read
 exports.getDeletedGroups = async (req, res) => {
   try {
     // Get all TrashcanGroup documents
@@ -9,6 +10,35 @@ exports.getDeletedGroups = async (req, res) => {
   } catch (error) {
     console.error("Error getting deleted groups:", error);
     res.status(500).json({ error: "Failed to get deleted groups" });
+  }
+};
+
+// Read
+exports.getDeletedGroupFlashcards = async (req, res) => {
+  try {
+    const groupId = req.params.groupId;
+
+    // Find the TrashcanGroup by originalId and populate the 'flashcards' field
+    const trashcanGroup = await TrashcanGroup.findOne({
+      originalId: groupId,
+    }).populate("flashcards");
+
+    if (!trashcanGroup) {
+      return res.status(404).json({ error: "Deleted group not found" });
+    }
+
+    // Extract the flashcards array from the populated TrashcanGroup
+    const flashcards = trashcanGroup.flashcards;
+
+    res.status(200).json(flashcards);
+  } catch (error) {
+    console.error("Error fetching flashcards from deleted group:", error);
+    res
+      .status(500)
+      .json({
+        error:
+          "An error occurred while fetching flashcards from deleted group.",
+      });
   }
 };
 

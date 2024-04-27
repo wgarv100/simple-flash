@@ -9,7 +9,8 @@ function App() {
     <Routes>
       <Route path="/" exact element={<HomePage />} />
       <Route path="/groups/:groupId" element={<DashboardPage />} />
-      <Route path="/trash" element={<TrashCanPage />} /> {/* Add this line */}
+      <Route path="/trash" element={<TrashCanPage />} />
+      <Route path="/trash/:groupId" element={<TrashCanPage />} />
     </Routes>
   );
 }

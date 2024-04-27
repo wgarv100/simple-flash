@@ -1,20 +1,29 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { Grid } from "@mui/material";
 import TrashCanSidebar from "../components/TrashCanSidebar";
 
 import { useDeletedGroups } from "../hooks/useTrash";
+import { useDeletedGroupFlashcards } from "../hooks/useDeletedGroupFlashcards";
+import DeletedGroupFlashcardList from "../components/DeletedGroupFlashcardList";
 
 const TrashCanPage = () => {
+  const { groupId } = useParams();
+
   const deletedGroups = useDeletedGroups();
+  const deletedGroupFlashcards = useDeletedGroupFlashcards(groupId);
 
   return (
     <div>
-      <Grid container>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Grid container spacing={2}>
+        <Grid item xs={2}>
           <TrashCanSidebar deletedGroups={deletedGroups} />
         </Grid>
-        <Grid item xs={12} sm={6} md={8} lg={9}>
-          {/* Rest of your page content goes here */}
+        <Grid item xs={10}>
+          <DeletedGroupFlashcardList
+            deletedGroupFlashcards={deletedGroupFlashcards}
+            groupId={groupId}
+          />
         </Grid>
       </Grid>
     </div>

@@ -7,11 +7,9 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const TrashCanSidebar = ({ deletedGroups }) => {
-  const { groupId } = useParams();
-
+const TrashCanSidebar = ({ deletedGroups, groupId }) => {
   return (
     <Drawer
       variant="permanent"
@@ -29,9 +27,10 @@ const TrashCanSidebar = ({ deletedGroups }) => {
             key={deletedGroup._id}
             button
             component={Link}
-            to={`/groups/${deletedGroup._id}`}
+            to={`/trash/${deletedGroup.originalId}`}
             sx={{
-              bgcolor: deletedGroup._id === groupId ? "lightgrey" : "inherit",
+              bgcolor:
+                deletedGroup.originalId === groupId ? "lightgrey" : "inherit",
             }}
           >
             <ListItemText primary={deletedGroup.name} />
