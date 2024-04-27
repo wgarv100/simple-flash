@@ -73,7 +73,7 @@ const DashboardPage = () => {
             >
               Update Group Name
             </Button>
-            <Button variant="outlined" color="error">
+            <Button variant="outlined" color="error" onClick={onDeleteGroup}>
               {confirmDelete ? "Confirm Delete" : "Delete Group"}
             </Button>
           </Box>

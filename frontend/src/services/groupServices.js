@@ -61,18 +61,27 @@ export const updateGroupName = async (groupId, newGroupName) => {
   }
 };
 
-// Delete
 const deleteGroup = async (groupId) => {
   try {
-    const response = await fetch(`/api/groups/${groupId}`, {
+    // First, move the group to the trashcan collection
+    const moveToTrashResponse = await fetch(`/api/trash/${groupId}`, {
+      method: "PUT",
+    });
+
+    if (!moveToTrashResponse.ok) {
+      throw new Error("Failed to move group to trash");
+    }
+
+    // Then, delete the group from the original collection
+    const deleteResponse = await fetch(`/api/groups/${groupId}`, {
       method: "DELETE",
     });
 
-    if (response.ok) {
-      return true; // Group deleted successfully
-    } else {
+    if (!deleteResponse.ok) {
       throw new Error("Failed to delete group");
     }
+
+    return true; // Group moved to trash and deleted successfully
   } catch (error) {
     console.error("Error deleting group:", error);
     return false;
