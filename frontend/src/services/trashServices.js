@@ -31,3 +31,22 @@ export const getDeletedGroupFlashcards = async (groupId) => {
     throw error;
   }
 };
+
+// Restore
+export const restoreDeletedGroup = async (groupId) => {
+  try {
+    const response = await fetch(`/api/trash/restore/${groupId}`, {
+      method: "PUT",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to restore the deleted group.");
+    }
+
+    const group = await response.json();
+    return group;
+  } catch (error) {
+    console.error("Error restoring the deleted group:", error);
+    throw error;
+  }
+};

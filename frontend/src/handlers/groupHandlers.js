@@ -1,3 +1,5 @@
+import { restoreDeletedGroup } from "../services/trashServices";
+
 export const handleDeleteGroup = (
   confirmDelete,
   deleteGroup,
@@ -24,4 +26,15 @@ export const handleDeleteGroup = (
   };
 
   handleDeleteConfirmation();
+};
+
+// Restore a group from the trash can
+export const handleRestoreGroup = (groupId, navigate) => {
+  restoreDeletedGroup(groupId)
+    .then((restoredGroup) => {
+      navigate(`/groups/${restoredGroup._id}`);
+    })
+    .catch((error) => {
+      console.error("Failed to restore group:", error);
+    });
 };
