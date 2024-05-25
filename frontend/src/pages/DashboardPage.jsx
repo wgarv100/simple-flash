@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 // MUI
-import { Grid, Button, Box } from "@mui/material";
+import { Button, Box, useTheme } from "@mui/material";
 
 // Components
 import FlashcardList from "../components/FlashcardList";
@@ -23,6 +23,7 @@ import { useGroups } from "../hooks/useGroups";
 
 const DashboardPage = () => {
   const { groupId } = useParams();
+  const theme = useTheme();
 
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [openUpdateGroupNameModal, setOpenUpdateGroupNameModal] =
@@ -54,11 +55,12 @@ const DashboardPage = () => {
 
   return (
     <div>
-      <Grid container spacing={2}>
-        <Grid item xs={2}>
+      <Box sx={{ ...theme.mixins.toolbar }} />
+      <Box display="flex">
+        <Box width={1 / 5}>
           <Sidebar groups={groups} />
-        </Grid>
-        <Grid item xs={10}>
+        </Box>
+        <Box width={4 / 5}>
           <Box
             display="flex"
             justifyContent="flex-end"
@@ -82,8 +84,8 @@ const DashboardPage = () => {
             groupId={groupId}
             onDeleteFlashcard={handleFlashcardDeletion}
           />
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
       <DashboardSpeedDial groupId={groupId} />
       <UpdateGroupNameModal
         groupId={groupId}
