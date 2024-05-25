@@ -29,10 +29,10 @@ export const handleDeleteGroup = (
 };
 
 // Restore a group from the trash can
-export const handleRestoreGroup = (groupId, navigate) => {
+export const handleRestoreGroup = (groupId, navigate, group) => {
   restoreDeletedGroup(groupId)
-    .then((restoredGroup) => {
-      navigate(`/groups/${restoredGroup._id}`);
+    .then(() => {
+      navigate(`/groups/${group[0]._id}`);
     })
     .catch((error) => {
       console.error("Failed to restore group:", error);

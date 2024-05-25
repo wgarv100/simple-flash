@@ -8,7 +8,7 @@ export const useFlashcards = (groupId) => {
     getFlashcardsByGroup(groupId)
       .then((data) => setFlashcards(data))
       .catch((error) => console.error("Error fetching flashcards:", error));
-  }, [flashcards]);
+  }, [flashcards, groupId]);
 
   return flashcards;
 };

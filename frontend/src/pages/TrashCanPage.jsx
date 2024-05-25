@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Grid, Button, Box } from "@mui/material";
 import TrashCanSidebar from "../components/TrashCanSidebar";
 
+import { useGroups } from "../hooks/useGroups";
 import { useDeletedGroups } from "../hooks/useTrash";
 import { useDeletedGroupFlashcards } from "../hooks/useDeletedGroupFlashcards";
 import DeletedGroupFlashcardList from "../components/DeletedGroupFlashcardList";
@@ -13,11 +14,12 @@ const TrashCanPage = () => {
   const { groupId } = useParams();
   const navigate = useNavigate();
 
+  const group = useGroups();
   const deletedGroups = useDeletedGroups();
   const deletedGroupFlashcards = useDeletedGroupFlashcards(groupId);
 
   const restoreGroup = () => {
-    handleRestoreGroup(groupId, navigate);
+    handleRestoreGroup(groupId, navigate, group);
   };
 
   return (
