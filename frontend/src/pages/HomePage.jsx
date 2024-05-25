@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
-import AddGroupForm from "../components/AddGroupForm";
-import { addGroup, getAllGroups } from "../services/groupServices";
+import { getAllGroups } from "../services/groupServices";
+import { Typography } from "@mui/material";
 
 const HomePage = () => {
   const [groups, setGroups] = useState([]);
@@ -12,24 +12,22 @@ const HomePage = () => {
       .catch((error) => console.error("Error fetching groups:", error));
   }, []);
 
-  const handleAddGroup = async (groupName) => {
-    try {
-      const success = await addGroup(groupName);
-
-      if (success) {
-        const updatedGroups = await getAllGroups(); // Fetch the updated list of groups
-        setGroups(updatedGroups);
-      }
-    } catch (error) {
-      console.error("Error handling add group:", error);
-    }
-  };
-
   return (
-    <div>
-      <h1>Home</h1>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
       <Sidebar groups={groups} />
-      <AddGroupForm onSubmit={handleAddGroup} />
+      <Typography
+        variant="h3"
+        style={{ flexGrow: 1, textAlign: "center", color: "black" }}
+      >
+        Select a group to get started
+      </Typography>
     </div>
   );
 };

@@ -5,22 +5,29 @@ import {
   List,
   ListItem,
   ListItemText,
+  Box,
 } from "@mui/material";
+
+import { useTheme } from "@mui/material/styles";
 
 import { Link } from "react-router-dom";
 
 const TrashCanSidebar = ({ deletedGroups, groupId }) => {
+  const drawerWidth = 240;
+  const theme = useTheme();
   return (
     <Drawer
       variant="permanent"
-      anchor="left"
-      PaperProps={{
-        sx: { width: "250px", backgroundColor: "#f0f0f0" },
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        [`& .MuiDrawer-paper`]: {
+          width: drawerWidth,
+          boxSizing: "border-box",
+        },
       }}
     >
-      <Typography variant="h6" align="center" sx={{ mt: 2 }}>
-        Deleted Groups
-      </Typography>
+      <Box sx={{ ...theme.mixins.toolbar }} />
       <List>
         {deletedGroups.map((deletedGroup) => (
           <ListItem

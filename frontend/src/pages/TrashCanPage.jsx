@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Grid, Button, Box } from "@mui/material";
+import { useTheme, Button, Box } from "@mui/material";
 import TrashCanSidebar from "../components/TrashCanSidebar";
 
 import { useGroups } from "../hooks/useGroups";
@@ -13,6 +13,7 @@ import { handleRestoreGroup } from "../handlers/groupHandlers";
 const TrashCanPage = () => {
   const { groupId } = useParams();
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const group = useGroups();
   const deletedGroups = useDeletedGroups();
@@ -24,11 +25,12 @@ const TrashCanPage = () => {
 
   return (
     <div>
-      <Grid container spacing={2}>
-        <Grid item xs={2}>
+      <Box sx={{ ...theme.mixins.toolbar }} />
+      <Box display="flex">
+        <Box width={1 / 5}>
           <TrashCanSidebar deletedGroups={deletedGroups} />
-        </Grid>
-        <Grid item xs={10}>
+        </Box>
+        <Box width={4 / 5}>
           <Box
             display="flex"
             justifyContent="flex-end"
@@ -43,8 +45,8 @@ const TrashCanPage = () => {
             deletedGroupFlashcards={deletedGroupFlashcards}
             groupId={groupId}
           />
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </div>
   );
 };
