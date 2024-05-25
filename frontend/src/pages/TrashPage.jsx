@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTheme, Button, Box } from "@mui/material";
-import TrashCanSidebar from "../components/TrashCanSidebar";
+import TrashSidebar from "../components/TrashSidebar";
 
 import { useGroups } from "../hooks/useGroups";
 import { useDeletedGroups } from "../hooks/useTrash";
@@ -28,7 +28,7 @@ const TrashCanPage = () => {
       <Box sx={{ ...theme.mixins.toolbar }} />
       <Box display="flex">
         <Box width={1 / 5}>
-          <TrashCanSidebar deletedGroups={deletedGroups} />
+          <TrashSidebar deletedGroups={deletedGroups} />
         </Box>
         <Box width={4 / 5}>
           <Box

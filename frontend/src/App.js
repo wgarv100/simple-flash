@@ -4,10 +4,9 @@ import { Link as RouterLink } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import EditPage from "./pages/EditPage";
 import TrashPage from "./pages/TrashPage";
-import { AppBar, Toolbar, Button, useTheme, Box } from "@mui/material";
+import { AppBar, Toolbar, Button, Box } from "@mui/material";
 
 function App() {
-  const theme = useTheme();
   return (
     <>
       <AppBar

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Drawer,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  Box,
-} from "@mui/material";
+import { Drawer, List, ListItem, ListItemText, Box } from "@mui/material";
 
 import { useTheme } from "@mui/material/styles";
 

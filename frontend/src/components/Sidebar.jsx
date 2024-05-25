@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  Box,
-  Typography,
-} from "@mui/material";
+import { Drawer, List, ListItem, ListItemText, Box } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 
