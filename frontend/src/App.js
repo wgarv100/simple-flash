@@ -2,8 +2,8 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import DashboardPage from "./pages/DashboardPage";
-import TrashCanPage from "./pages/TrashCanPage";
+import EditPage from "./pages/EditPage";
+import TrashPage from "./pages/TrashPage";
 import { AppBar, Toolbar, Button, useTheme, Box } from "@mui/material";
 
 function App() {
@@ -26,9 +26,9 @@ function App() {
       </AppBar>
       <Routes>
         <Route path="/" exact element={<HomePage />} />
-        <Route path="/groups/:groupId" element={<DashboardPage />} />
-        <Route path="/trash" element={<TrashCanPage />} />
-        <Route path="/trash/:groupId" element={<TrashCanPage />} />
+        <Route path="/groups/:groupId" element={<EditPage />} />
+        <Route path="/trash" element={<TrashPage />} />
+        <Route path="/trash/:groupId" element={<TrashPage />} />
       </Routes>
     </>
   );
