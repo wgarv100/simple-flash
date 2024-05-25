@@ -4,6 +4,7 @@ import { Link as RouterLink } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import EditPage from "./pages/EditPage";
 import TrashPage from "./pages/TrashPage";
+import ReviewPage from "./pages/ReviewPage";
 import { AppBar, Toolbar, Button, Box } from "@mui/material";
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
           <Button color="inherit" component={RouterLink} to="/trash">
             Trash
           </Button>
+          <Button color="inherit" component={RouterLink} to="/review">
+            Review
+          </Button>
         </Toolbar>
       </AppBar>
       <Routes>
@@ -28,6 +32,7 @@ function App() {
         <Route path="/groups/:groupId" element={<EditPage />} />
         <Route path="/trash" element={<TrashPage />} />
         <Route path="/trash/:groupId" element={<TrashPage />} />
+        <Route path="/review" element={<ReviewPage />} />
       </Routes>
     </>
   );
