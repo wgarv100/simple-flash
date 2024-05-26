@@ -53,6 +53,10 @@ const DashboardPage = () => {
     setOpenUpdateGroupNameModal(false);
   };
 
+  const handleReviewClick = () => {
+    navigate(`/review/${groupId}`);
+  };
+
   return (
     <div>
       <Box sx={{ ...theme.mixins.toolbar }} />
@@ -67,6 +71,14 @@ const DashboardPage = () => {
             marginTop={1}
             marginBottom={2}
           >
+            <Button
+              variant="contained"
+              color="success"
+              onClick={handleReviewClick}
+              style={{ marginRight: "10px" }}
+            >
+              Review
+            </Button>
             <Button
               variant="outlined"
               color="primary"

@@ -8,11 +8,16 @@ import {
   Box,
 } from "@mui/material";
 import { useState } from "react";
+// import { useParams } from "react-router-dom";
+// import { useFlashcards } from "../hooks/useFlashcards";
 
 const ReviewPage = () => {
   const theme = useTheme();
 
   const [showAnswer, setShowAnswer] = useState(false);
+
+  //   const { groupId } = useParams();
+  //   const flashcards = useFlashcards(groupId);
 
   return (
     <div
