@@ -17,6 +17,7 @@ const ReviewPage = () => {
 
   const [showAnswer, setShowAnswer] = useState(false);
   const [shuffledFlashcards, setShuffledFlashcards] = useState([]);
+  const [currentFlashcardIndex, setCurrentFlashcardIndex] = useState(0);
 
   const { groupId } = useParams();
   const flashcards = useReviewFlashcards(groupId);
@@ -27,6 +28,7 @@ const ReviewPage = () => {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
+    setCurrentFlashcardIndex(0);
     return shuffled;
   };
 
@@ -78,10 +80,10 @@ const ReviewPage = () => {
             }}
           >
             <Typography variant="h5" component="div">
-              {shuffledFlashcards[0].title}
+              {shuffledFlashcards[currentFlashcardIndex]?.body}
             </Typography>
             <Button onClick={() => setShowAnswer(!showAnswer)}>
-              Show Answer
+              Show Question
             </Button>
           </CardContent>
         </Card>
@@ -106,10 +108,10 @@ const ReviewPage = () => {
             }}
           >
             <Typography variant="h5" component="div">
-              {shuffledFlashcards.body}
+              {shuffledFlashcards[currentFlashcardIndex]?.title}
             </Typography>
             <Button onClick={() => setShowAnswer(!showAnswer)}>
-              Show Question
+              Show Answer
             </Button>
           </CardContent>
         </Card>
