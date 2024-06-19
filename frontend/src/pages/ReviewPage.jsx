@@ -7,7 +7,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useReviewFlashcards } from "../hooks/useReview";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -16,13 +16,27 @@ const ReviewPage = () => {
   const theme = useTheme();
 
   const [showAnswer, setShowAnswer] = useState(false);
+  const [shuffledFlashcards, setShuffledFlashcards] = useState([]);
 
   const { groupId } = useParams();
   const flashcards = useReviewFlashcards(groupId);
 
-  // console.log("groupId", groupId);
+  const shuffleFlashcards = (flashcards) => {
+    let shuffled = [...flashcards];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
 
-  console.log(flashcards);
+  useEffect(() => {
+    if (flashcards && flashcards.length > 0) {
+      setShuffledFlashcards(shuffleFlashcards(flashcards));
+    }
+  }, [flashcards]);
+
+  console.log("shuffled:", shuffledFlashcards);
 
   return (
     <div
@@ -64,7 +78,7 @@ const ReviewPage = () => {
             }}
           >
             <Typography variant="h5" component="div">
-              Question
+              {shuffledFlashcards[0].title}
             </Typography>
             <Button onClick={() => setShowAnswer(!showAnswer)}>
               Show Answer
@@ -92,7 +106,7 @@ const ReviewPage = () => {
             }}
           >
             <Typography variant="h5" component="div">
-              Answer
+              {shuffledFlashcards.body}
             </Typography>
             <Button onClick={() => setShowAnswer(!showAnswer)}>
               Show Question
