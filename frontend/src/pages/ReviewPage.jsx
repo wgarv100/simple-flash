@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useReviewFlashcards } from "../hooks/useReview";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const ReviewPage = () => {
   const theme = useTheme();
@@ -34,6 +35,14 @@ const ReviewPage = () => {
       }}
     >
       <Box sx={{ ...theme.mixins.toolbar }} />
+      <ArrowForwardIosIcon
+        sx={{
+          position: "absolute",
+          right: 0,
+          top: "50%",
+          transform: "translateY(-50%)",
+        }}
+      />
       {showAnswer ? (
         <Card
           variant="outlined"
