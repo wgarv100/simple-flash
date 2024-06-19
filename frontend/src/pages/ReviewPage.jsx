@@ -38,14 +38,22 @@ const ReviewPage = () => {
         <Card
           variant="outlined"
           sx={{
-            width: "25%",
-            height: "25vh",
+            width: "50%",
+            height: "50%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <CardContent>
+          <CardContent
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
             <Typography variant="h5" component="div">
               Question
             </Typography>
@@ -58,22 +66,28 @@ const ReviewPage = () => {
         <Card
           variant="outlined"
           sx={{
-            width: "25%",
-            height: "25vh",
+            width: "50%",
+            height: "50%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <CardContent>
+          <CardContent
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
             <Typography variant="h5" component="div">
               Answer
             </Typography>
-            <Box sx={{ marginTop: "auto", padding: "16px" }}>
-              <Button onClick={() => setShowAnswer(!showAnswer)}>
-                Show Question
-              </Button>
-            </Box>
+            <Button onClick={() => setShowAnswer(!showAnswer)}>
+              Show Question
+            </Button>
           </CardContent>
         </Card>
       )}
