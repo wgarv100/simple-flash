@@ -22,9 +22,6 @@ function App() {
           <Button color="inherit" component={RouterLink} to="/trash">
             Trash
           </Button>
-          <Button color="inherit" component={RouterLink} to="/review">
-            Review
-          </Button>
         </Toolbar>
       </AppBar>
       <Routes>
@@ -32,7 +29,7 @@ function App() {
         <Route path="/groups/:groupId" element={<EditPage />} />
         <Route path="/trash" element={<TrashPage />} />
         <Route path="/trash/:groupId" element={<TrashPage />} />
-        <Route path="/review" element={<ReviewPage />} />
+        <Route path="/review/:groupId" element={<ReviewPage />} />
       </Routes>
     </>
   );
