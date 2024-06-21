@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useReviewFlashcards } from "../hooks/useReview";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 const ReviewPage = () => {
   const theme = useTheme();
@@ -38,85 +39,108 @@ const ReviewPage = () => {
     }
   }, [flashcards]);
 
-  console.log("shuffled:", shuffledFlashcards);
+  const goToNextFlashcard = () => {
+    setCurrentFlashcardIndex(
+      (prevIndex) => (prevIndex + 1) % shuffledFlashcards.length
+    );
+  };
+
+  const goToPreviousFlashcard = () => {
+    setCurrentFlashcardIndex(
+      (prevIndex) =>
+        (prevIndex - 1 + shuffledFlashcards.length) % shuffledFlashcards.length
+    );
+  };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#f5f5f5",
-      }}
-    >
-      <Box sx={{ ...theme.mixins.toolbar }} />
-      <ArrowForwardIosIcon
+    <>
+      <ArrowBackIosIcon
         sx={{
           position: "absolute",
-          right: 0,
+          left: 5, // Assuming you want this on the left side
           top: "50%",
           transform: "translateY(-50%)",
         }}
+        onClick={goToPreviousFlashcard}
       />
-      {showAnswer ? (
-        <Card
-          variant="outlined"
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          backgroundColor: "#f5f5f5",
+        }}
+      >
+        <Box sx={{ ...theme.mixins.toolbar }} />
+        <ArrowForwardIosIcon
           sx={{
-            width: "50%",
-            height: "50%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            position: "absolute",
+            right: 5,
+            top: "50%",
+            transform: "translateY(-50%)",
           }}
-        >
-          <CardContent
+          onClick={goToNextFlashcard}
+        />
+        {showAnswer ? (
+          <Card
+            variant="outlined"
             sx={{
+              width: "50%",
+              height: "50%",
               display: "flex",
-              flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              height: "100%",
             }}
           >
-            <Typography variant="h5" component="div">
-              {shuffledFlashcards[currentFlashcardIndex]?.body}
-            </Typography>
-            <Button onClick={() => setShowAnswer(!showAnswer)}>
-              Show Question
-            </Button>
-          </CardContent>
-        </Card>
-      ) : (
-        <Card
-          variant="outlined"
-          sx={{
-            width: "50%",
-            height: "50%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <CardContent
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+              }}
+            >
+              <Typography variant="h5" component="div">
+                {shuffledFlashcards[currentFlashcardIndex]?.body}
+              </Typography>
+              <Button onClick={() => setShowAnswer(!showAnswer)}>
+                Show Question
+              </Button>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card
+            variant="outlined"
             sx={{
+              width: "50%",
+              height: "50%",
               display: "flex",
-              flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              height: "100%",
             }}
           >
-            <Typography variant="h5" component="div">
-              {shuffledFlashcards[currentFlashcardIndex]?.title}
-            </Typography>
-            <Button onClick={() => setShowAnswer(!showAnswer)}>
-              Show Answer
-            </Button>
-          </CardContent>
-        </Card>
-      )}
-    </div>
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+              }}
+            >
+              <Typography variant="h5" component="div">
+                {shuffledFlashcards[currentFlashcardIndex]?.title}
+              </Typography>
+              <Button onClick={() => setShowAnswer(!showAnswer)}>
+                Show Answer
+              </Button>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+    </>
   );
 };
 
