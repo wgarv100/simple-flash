@@ -21,7 +21,7 @@ exports.createGroup = async (req, res) => {
 exports.getAllGroups = async (req, res) => {
   try {
     const groups = await Group.find();
-    res.json(groups);
+    res.status(200).json(groups);
   } catch (error) {
     console.error("Error fetching groups:", error);
     res.status(500).json({ error: "An error occurred while fetching groups." });

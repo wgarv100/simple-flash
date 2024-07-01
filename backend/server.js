@@ -22,11 +22,9 @@ mongoose
     app.use("/api/flashcards", flashcardRoutes);
     app.use("/api/trash", trashRoutes);
     app.use("/api/review", reviewRoutes);
-
-    app.listen(5000, () => {
-      console.log(`Server is running on port ${port}`);
-    });
   })
   .catch((error) => {
     console.error("Error connecting to MongoDB");
   });
+
+module.exports = app;
