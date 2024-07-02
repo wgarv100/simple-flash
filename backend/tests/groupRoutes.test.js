@@ -16,4 +16,25 @@ describe("Group Routes", () => {
     const res = await request(app).get("/api/groups");
     expect(res.statusCode).toEqual(200);
   });
+
+  // Update
+  it("should update a group", async () => {
+    const res = await request(app)
+      .post("/api/groups")
+      .send({ name: "Test Group" });
+    const updateRes = await request(app)
+      .patch(`/api/groups/${res.body._id}`)
+      .send({ name: "Updated Group" });
+    expect(updateRes.statusCode).toEqual(200);
+    expect(updateRes.body).toHaveProperty("name", "Updated Group");
+  });
+
+  // Delete
+  it("should delete a group", async () => {
+    const res = await request(app)
+      .post("/api/groups")
+      .send({ name: "Test Group" });
+    const deleteRes = await request(app).delete(`/api/groups/${res.body._id}`);
+    expect(deleteRes.statusCode).toEqual(204);
+  });
 });
