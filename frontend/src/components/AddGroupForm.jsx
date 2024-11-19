@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { addGroup } from "../services/groupServices";
-import { validateAddGroupForm } from "./formValidation";
+import { validateAddGroupForm } from "../validation/formValidation";
 
 const GroupForm = ({ handleGroupAddedSuccessfully }) => {
   const [groupName, setGroupName] = useState("");

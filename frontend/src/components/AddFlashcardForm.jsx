@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { addFlashcard } from "../services/flashcardServices";
-import { validateAddFlashcardForm } from "./formValidation";
+import { validateAddFlashcardForm } from "../validation/formValidation";
 
 const AddFlashcardForm = ({ groupId, onFlashcardAdded, onClose }) => {
   const [title, setTitle] = useState("");

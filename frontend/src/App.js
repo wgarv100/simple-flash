@@ -1,11 +1,18 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Form } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import EditPage from "./pages/EditPage";
 import TrashPage from "./pages/TrashPage";
 import ReviewPage from "./pages/ReviewPage";
-import { AppBar, Toolbar, Button, Box } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Box,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 function App() {
   return (
@@ -15,6 +22,9 @@ function App() {
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Toolbar>
+          <Typography variant="h4" sx={{ justifyContent: "left" }}>
+            Simple Flash
+          </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Button color="inherit" component={RouterLink} to="/">
             Home
